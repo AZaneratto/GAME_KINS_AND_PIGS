@@ -41,6 +41,12 @@ public class Player : MonoBehaviour
     }
 
 
+
+    private void TomarHit()
+    {
+
+    }
+
     private void Escalar()
     {
         if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
