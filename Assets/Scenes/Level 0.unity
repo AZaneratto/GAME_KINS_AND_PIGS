@@ -4104,6 +4104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7358181686276575578, guid: 1dcb2b8b1aa05344487df87dd00128bb, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7358181686276575581, guid: 1dcb2b8b1aa05344487df87dd00128bb, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4153,8 +4157,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7358181686276575582, guid: 1dcb2b8b1aa05344487df87dd00128bb, type: 3}
+      propertyPath: tamanhoPulo
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358181686276575582, guid: 1dcb2b8b1aa05344487df87dd00128bb, type: 3}
       propertyPath: velocidadeCorrer
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dcb2b8b1aa05344487df87dd00128bb, type: 3}

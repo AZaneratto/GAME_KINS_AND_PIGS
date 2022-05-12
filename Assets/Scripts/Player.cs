@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D myRigidBody2D;
     Animator myAnimator;
+    BoxCollider2D myBoxCollider2D;
+    PolygonCollider2D myPlayerFeet;
 
 
     [SerializeField] float velocidadeCorrer = 5f;
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
     {
         myRigidBody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myBoxCollider2D = GetComponent<BoxCollider2D>();
+        myPlayerFeet = GetComponent<PolygonCollider2D>();
     }
 
     // Update is called once per frame
@@ -34,6 +38,8 @@ public class Player : MonoBehaviour
 
     private void Pular()
     {
+        if (!myPlayerFeet.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+
         bool Pulando = CrossPlatformInputManager.GetButtonDown("Jump");
         
         if(Pulando)
