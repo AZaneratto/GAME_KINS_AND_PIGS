@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] float velocidadeCorrer = 5f;
     [SerializeField] float tamanhoPulo = 20f;
+    [SerializeField] float taxaDeEscalada = 6f;
+
+    float startingGravityScale;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,8 @@ public class Player : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myBoxCollider2D = GetComponent<BoxCollider2D>();
         myPlayerFeet = GetComponent<PolygonCollider2D>();
+
+        startingGravityScale = myRigidBody2D.gravityScale;
     }
 
     // Update is called once per frame
@@ -30,12 +35,34 @@ public class Player : MonoBehaviour
     {
         Correr();
         Pular();
+        Escalar();
 
         
     }
 
 
+    private void Escalar()
+    {
+        if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        {
+            float controleEscalando = CrossPlatformInputManager.GetAxis("Vertical");
+            Vector2 velocidadeEscalada = new Vector2(myRigidBody2D.velocity.x, controleEscalando * taxaDeEscalada);
+            myRigidBody2D.velocity = velocidadeEscalada;
 
+            myAnimator.SetBool("Climbing",true);
+
+            myRigidBody2D.gravityScale = 0f;
+            
+            
+        }
+
+        else
+        {
+            myAnimator.SetBool("Climbing", false);
+            myRigidBody2D.gravityScale = startingGravityScale;
+        }
+
+    }
     private void Pular()
     {
         if (!myPlayerFeet.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }

@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
+  - Ground
   - 
-  - 
-  - 
-  - 
-  - 
+  - Climbing
+  - Player
+  - World Confine
   - 
   - 
   - 
@@ -41,8 +41,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: World Confine
+    uniqueID: 989859081
+    locked: 0
   - name: Background
     uniqueID: 2220166961
+    locked: 0
+  - name: Climb
+    uniqueID: 2462747195
+    locked: 0
+  - name: Pig
+    uniqueID: 3084301557
     locked: 0
   - name: Player
     uniqueID: 1477849281
