@@ -1,25 +1,16 @@
 fileFormatVersion: 2
-guid: 30102040c19d95545be0dfe4cbb0e8f1
+guid: 0b5eb0cdd37245f4183bb0df7de53cfb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 267546352847214023
-    second: Boooooom (52x56)_0
+      213: -284007684338051874
+    second: Attack (78x58)_0
   - first:
-      213: -6976873530015021468
-    second: Boooooom (52x56)_1
+      213: -1349876022115668649
+    second: Attack (78x58)_1
   - first:
-      213: -4567318441294727832
-    second: Boooooom (52x56)_2
-  - first:
-      213: -428162678258729971
-    second: Boooooom (52x56)_3
-  - first:
-      213: -5653286809703665033
-    second: Boooooom (52x56)_4
-  - first:
-      213: 6156021782156299022
-    second: Boooooom (52x56)_5
+      213: 5505932642739978319
+    second: Attack (78x58)_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -64,7 +55,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 15
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -133,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boooooom (52x56)_0
+      name: Attack (78x58)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 52
-        height: 56
+        width: 78
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c5d86a8df386b300800000000000000
-      internalID: 267546352847214023
+      spriteID: ed49c8d04800f0cf0800000000000000
+      internalID: -284007684338051874
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boooooom (52x56)_1
+      name: Attack (78x58)_1
       rect:
         serializedVersion: 2
-        x: 52
+        x: 78
         y: 0
-        width: 52
-        height: 56
+        width: 78
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,41 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46601a05d7a2d2f90800000000000000
-      internalID: -6976873530015021468
+      spriteID: 75d6afae8e6444de0800000000000000
+      internalID: -1349876022115668649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boooooom (52x56)_2
-      rect:
-        serializedVersion: 2
-        x: 104
-        y: 0
-        width: 52
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 865798a8310ad90c0800000000000000
-      internalID: -4567318441294727832
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Boooooom (52x56)_3
+      name: Attack (78x58)_2
       rect:
         serializedVersion: 2
         x: 156
         y: 0
-        width: 52
-        height: 56
+        width: 78
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,50 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0cfe48005cde0af0800000000000000
-      internalID: -428162678258729971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Boooooom (52x56)_4
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 0
-        width: 52
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7723636599d7b81b0800000000000000
-      internalID: -5653286809703665033
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Boooooom (52x56)_5
-      rect:
-        serializedVersion: 2
-        x: 260
-        y: 0
-        width: 52
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e0b4ef2e1359e6550800000000000000
-      internalID: 6156021782156299022
+      spriteID: f408ebf1190096c40800000000000000
+      internalID: 5505932642739978319
       vertices: []
       indices: 
       edges: []

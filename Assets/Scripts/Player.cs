@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] float tamanhoPulo = 20f;
     [SerializeField] float taxaDeEscalada = 6f;
     [SerializeField] Vector2 hitKick = new Vector2(20f, 20f);
+    [SerializeField] Transform hurtBox;
+    [SerializeField] float attackRadius = 3f;
 
     float startingGravityScale;
     bool isHurting = false;
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
             Correr();
             Pular();
             Escalar();
+            Attack();
             if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Pig")))
             {
                 PlayerHit();
@@ -52,9 +56,24 @@ public class Player : MonoBehaviour
         
     }
 
+    private void Attack()
+    {
+        if (CrossPlatformInputManager.GetButtonDown("Fire1"))
+        {
+            myAnimator.SetTrigger("Attacking");
+            Collider2D[] enemiesToHit =  Physics2D.OverlapCircleAll(hurtBox.position, attackRadius, LayerMask.GetMask("Pig"));
+
+            foreach(Collider2D pig in enemiesToHit)
+            {
+                pig.GetComponent<Pig>().Dying();
+
+            }
 
 
-    private void PlayerHit()
+        }
+    }
+
+    public void PlayerHit()
     {
         myRigidBody2D.velocity = hitKick * new Vector2(-transform.localScale.x, 1f);
         myAnimator.SetTrigger("Hitting");
@@ -65,7 +84,7 @@ public class Player : MonoBehaviour
 
     IEnumerator StopHurting()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         isHurting = false;
 
@@ -136,6 +155,10 @@ public class Player : MonoBehaviour
         bool correndoHorizontal = Mathf.Abs(myRigidBody2D.velocity.x) > Mathf.Epsilon;
         myAnimator.SetBool("Running", correndoHorizontal);
 
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(hurtBox.position, attackRadius);
     }
 
 }
