@@ -16,8 +16,10 @@ public class Player : MonoBehaviour
     [SerializeField] float velocidadeCorrer = 5f;
     [SerializeField] float tamanhoPulo = 20f;
     [SerializeField] float taxaDeEscalada = 6f;
+    [SerializeField] Vector2 hitKick = new Vector2(20f, 20f);
 
     float startingGravityScale;
+    bool isHurting = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,17 +35,39 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Correr();
-        Pular();
-        Escalar();
+        
 
+
+        if (!isHurting)
+        {
+            Correr();
+            Pular();
+            Escalar();
+            if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Pig")))
+            {
+                PlayerHit();
+            }
+
+        }
         
     }
 
 
 
-    private void TomarHit()
+    private void PlayerHit()
     {
+        myRigidBody2D.velocity = hitKick * new Vector2(-transform.localScale.x, 1f);
+        myAnimator.SetTrigger("Hitting");
+        isHurting = true;
+        StartCoroutine(StopHurting());
+
+    }
+
+    IEnumerator StopHurting()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        isHurting = false;
 
     }
 
