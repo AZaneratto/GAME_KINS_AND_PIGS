@@ -17,7 +17,7 @@ TagManager:
   - Player
   - World Confine
   - Pig
-  - 
+  - Interact
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
   - name: Background
     uniqueID: 2220166961
     locked: 0
+  - name: Window
+    uniqueID: 2358278811
+    locked: 0
   - name: Climb
     uniqueID: 2462747195
     locked: 0
@@ -58,6 +61,9 @@ TagManager:
     locked: 0
   - name: Bomb
     uniqueID: 2191448153
+    locked: 0
+  - name: Interact
+    uniqueID: 4043653381
     locked: 0
   - name: Foreground
     uniqueID: 2333856783
