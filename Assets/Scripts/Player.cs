@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         myPlayerFeet = GetComponent<PolygonCollider2D>();
 
         startingGravityScale = myRigidBody2D.gravityScale;
+        myAnimator.SetTrigger("Appering");
     }
 
     // Update is called once per frame
@@ -52,9 +53,37 @@ public class Player : MonoBehaviour
                 PlayerHit();
             }
 
+            ExitLevel();
+
         }
         
     }
+
+
+    private void ExitLevel()
+    {
+        if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Interact")) && CrossPlatformInputManager.GetButtonDown("Vertical"))
+        {
+
+            myAnimator.SetTrigger("Dissapearing");
+            
+            
+        }
+    }
+
+    public void TurnOffRenderer()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public void LoadNextLevel()
+    {
+        FindObjectOfType<ExitDoor>().StartLoadingNextLevel();
+        TurnOffRenderer();
+
+    }
+   
+
 
     private void Attack()
     {
@@ -79,6 +108,8 @@ public class Player : MonoBehaviour
         myAnimator.SetTrigger("Hitting");
         isHurting = true;
         StartCoroutine(StopHurting());
+
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
 
     }
 
