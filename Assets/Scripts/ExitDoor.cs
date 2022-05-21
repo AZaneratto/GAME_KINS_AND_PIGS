@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ExitDoor : MonoBehaviour
 {
-
+    [SerializeField] AudioClip openingDoorSFX, closeDoorSFX;
     [SerializeField] float secondsToLoad = 2f;
 
     // Start is called before the first frame update
@@ -17,6 +17,7 @@ public class ExitDoor : MonoBehaviour
     public void StartLoadingNextLevel()
     {
         GetComponent<Animator>().SetTrigger("Close");
+        AudioSource.PlayClipAtPoint(closeDoorSFX, Camera.main.transform.position);
 
         StartCoroutine(LoadNextLevel());
 
@@ -32,4 +33,10 @@ public class ExitDoor : MonoBehaviour
 
 
     }
+
+    void PlayOpeningDoorSFX()
+    {
+       AudioSource.PlayClipAtPoint(openingDoorSFX, Camera.main.transform.position);
+    }
+   
 }

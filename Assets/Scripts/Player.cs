@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     Animator myAnimator;
     BoxCollider2D myBoxCollider2D;
     PolygonCollider2D myPlayerFeet;
+    AudioSource myAudioSource;
 
 
     [SerializeField] float velocidadeCorrer = 5f;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] Vector2 hitKick = new Vector2(20f, 20f);
     [SerializeField] Transform hurtBox;
     [SerializeField] float attackRadius = 3f;
+    [SerializeField] AudioClip jumpingSFX, attackingSFX, playerDeathSFX, getHit, walkSFX;
 
     float startingGravityScale;
     bool isHurting = false;
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
 
         startingGravityScale = myRigidBody2D.gravityScale;
         myAnimator.SetTrigger("Appering");
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,8 +53,9 @@ public class Player : MonoBehaviour
             Attack();
             if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Pig")))
             {
-                PlayerHit();
+               // PlayerHit();
             }
+           
 
             ExitLevel();
 
@@ -90,11 +94,12 @@ public class Player : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Fire1"))
         {
             myAnimator.SetTrigger("Attacking");
+            myAudioSource.PlayOneShot(attackingSFX);
             Collider2D[] enemiesToHit =  Physics2D.OverlapCircleAll(hurtBox.position, attackRadius, LayerMask.GetMask("Pig"));
 
             foreach(Collider2D pig in enemiesToHit)
             {
-                pig.GetComponent<Pig>().Dying();
+                pig.GetComponent<Pig>().EnemyHit();
 
             }
 
@@ -106,6 +111,7 @@ public class Player : MonoBehaviour
     {
         myRigidBody2D.velocity = hitKick * new Vector2(-transform.localScale.x, 1f);
         myAnimator.SetTrigger("Hitting");
+        myAudioSource.PlayOneShot(getHit);
         isHurting = true;
         StartCoroutine(StopHurting());
 
@@ -130,6 +136,7 @@ public class Player : MonoBehaviour
             myRigidBody2D.velocity = velocidadeEscalada;
 
             myAnimator.SetBool("Climbing",true);
+            
 
             myRigidBody2D.gravityScale = 0f;
             
@@ -153,6 +160,7 @@ public class Player : MonoBehaviour
         {
             Vector2 velocidadePulo = new Vector2(myRigidBody2D.velocity.x,tamanhoPulo);
             myRigidBody2D.velocity = velocidadePulo;
+            myAudioSource.PlayOneShot(jumpingSFX);
         }
     }
 
@@ -168,6 +176,23 @@ public class Player : MonoBehaviour
        
 
     }
+
+    void stepSFX()
+    {
+        bool playerMovingHorizontal = Mathf.Abs(myRigidBody2D.velocity.x) > Mathf.Epsilon;
+        if(playerMovingHorizontal)
+        {
+            if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            {
+                myAudioSource.PlayOneShot(walkSFX);
+            }
+        }
+        else
+        {
+            myAudioSource.Stop();
+        }
+    }
+
 
     private void FlipSprite()
 
@@ -185,11 +210,15 @@ public class Player : MonoBehaviour
     {
         bool correndoHorizontal = Mathf.Abs(myRigidBody2D.velocity.x) > Mathf.Epsilon;
         myAnimator.SetBool("Running", correndoHorizontal);
+        
+
 
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(hurtBox.position, attackRadius);
     }
+
+    
 
 }

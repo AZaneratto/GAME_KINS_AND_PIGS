@@ -6,16 +6,36 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Pig : MonoBehaviour
 {
-    [SerializeField] float pigRunSpeed = 2f;
+
+
+
+    private Transform positionPlayer;
+    public float velocityEnemy=4;
 
     Rigidbody2D pigRigidBody;
     Animator pigAnimator;
+    AudioSource myAudioSource;
+    BoxCollider2D myBoxCollider;
+    CircleCollider2D mycircleCollider;
 
+    [SerializeField] int pigLives = 20;
+    [SerializeField] float pigRunSpeed = 2f;
+    [SerializeField] Vector2 hitKick = new Vector2(20f, 20f);
+    [SerializeField] AudioClip pigDeathSFX;
+    
+
+    bool isHurting = false;
+    bool left;
     // Start is called before the first frame update
     void Start()
     {
         pigRigidBody = GetComponent<Rigidbody2D>();
         pigAnimator = GetComponent<Animator>();
+        myAudioSource = GetComponent<AudioSource>();
+        myBoxCollider = GetComponent<BoxCollider2D>();
+        mycircleCollider = GetComponent<CircleCollider2D>();
+        positionPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        
 
     }
 
@@ -24,14 +44,78 @@ public class Pig : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        PigMoviment();
-       
-        
+        if(!isHurting)
+        {
+            viewPlayer();
+        }
+            
+
     }
 
-  
+   
+
+    private void ComePlayer()
+    {
+
+        if(positionPlayer.gameObject != null)
+        {
+            pigAnimator.SetTrigger("Running");
+            transform.position = Vector2.MoveTowards(transform.position, positionPlayer.position, velocityEnemy * Time.deltaTime);
+        }
+        
+
+    }
+
+    private void viewPlayer()
+    {
+
+        pigAnimator.SetTrigger("idle");
+        if (mycircleCollider.IsTouchingLayers(LayerMask.GetMask("Player")))
+        {
+            ComePlayer();
+        }
+    }
 
 
+    
+
+
+
+
+    public void EnemyHit()
+    {
+
+        if (left)
+        {
+            pigRigidBody.velocity = hitKick * new Vector2(transform.localScale.x, 1f);
+        }
+        else
+        {
+            pigRigidBody.velocity = hitKick * new Vector2(transform.localScale.x, 1f);
+        }
+
+        
+        pigAnimator.SetTrigger("PigHit");
+        isHurting = true;
+        pigLives--;
+        print(pigLives);
+        StartCoroutine(StopHurting());
+        pigLives--;
+        print(pigLives);
+        pigAnimator.SetTrigger("PigRunning");
+        if (pigLives < 1)
+        {
+            Dying();
+        }
+
+    }
+
+    IEnumerator StopHurting()
+    {
+        yield return new WaitForSeconds(1f);
+        isHurting = false;
+
+    }
 
     public void Dying()
     {
@@ -64,11 +148,12 @@ public class Pig : MonoBehaviour
         if (IsFacingLeft())
         {
             pigRigidBody.velocity = new Vector2(-pigRunSpeed, 0f);
+            
         }
         else
         {
             pigRigidBody.velocity = new Vector2(pigRunSpeed, 0f);
-
+            
         }
     }
 
@@ -84,6 +169,10 @@ public class Pig : MonoBehaviour
             
     }
 
-    
+    void PigDeath()
+    {
+        AudioSource.PlayClipAtPoint(pigDeathSFX, Camera.main.transform.position);
+    }
+
 
 }

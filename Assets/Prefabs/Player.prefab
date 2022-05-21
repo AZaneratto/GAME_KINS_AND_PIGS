@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2944254346922605624}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0, z: -52.662918}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2944254347771227012}
@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 2944254347582283086}
   - component: {fileID: 2944254347582283087}
   - component: {fileID: 2944254347582283080}
+  - component: {fileID: 1815082326}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -229,6 +230,11 @@ MonoBehaviour:
   hitKick: {x: 20, y: 20}
   hurtBox: {fileID: 2944254346922605631}
   attackRadius: 0.9
+  jumpingSFX: {fileID: 8300000, guid: 2517718c4b42cda49a7c605c8d8dd9ae, type: 3}
+  attackingSFX: {fileID: 8300000, guid: 15ab2b0a33564144cb8cd7e8d72149c0, type: 3}
+  playerDeathSFX: {fileID: 0}
+  getHit: {fileID: 8300000, guid: da1a36488cbcc7440b7df90582368eb7, type: 3}
+  walkSFX: {fileID: 8300000, guid: fdb0debd0e0d55549b6f75bc621f895a, type: 3}
 --- !u!60 &2944254347582283080
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -279,3 +285,99 @@ PolygonCollider2D:
       - {x: 0.32667315, y: -0.5022009}
       - {x: 0.32331347, y: -0.36553028}
       - {x: 0.3055381, y: -0.36248717}
+--- !u!82 &1815082326
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2944254347582283081}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

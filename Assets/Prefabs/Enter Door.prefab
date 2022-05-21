@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 528922300972558560}
   - component: {fileID: 299582244129477932}
   - component: {fileID: 419557437634375286}
+  - component: {fileID: 1011794455}
   m_Layer: 0
   m_Name: Enter Door
   m_TagString: Untagged
@@ -95,3 +96,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9722d59ba995048896f2f3fa74901d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openingDoorSFX: {fileID: 8300000, guid: 7e1a02106716d164d86a95c687aac0b9, type: 3}
+  closeDoorSFX: {fileID: 8300000, guid: 7d7fe254db9d2cf47a8d79242cc09194, type: 3}
+--- !u!95 &1011794455
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175368840361418066}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e5414d1ebf782d4c8ba1dd6da5c23d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
