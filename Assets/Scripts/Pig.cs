@@ -22,8 +22,10 @@ public class Pig : MonoBehaviour
     [SerializeField] float pigRunSpeed = 2f;
     [SerializeField] Vector2 hitKick = new Vector2(20f, 20f);
     [SerializeField] AudioClip pigDeathSFX;
-    
+    [SerializeField] float raioView;
+    [SerializeField] float rangeAttack = 2f;
 
+    public bool facingRight = false;
     bool isHurting = false;
     bool left;
     // Start is called before the first frame update
@@ -46,43 +48,80 @@ public class Pig : MonoBehaviour
     {
         if(!isHurting)
         {
-            viewPlayer();
+
+        if (positionPlayer.transform.position.x < gameObject.transform.position.x && facingRight)
+            {
+                Flip();
+            }
+        if (positionPlayer.transform.position.x > gameObject.transform.position.x && !facingRight)
+            {
+                Flip();
+            }
+            ComePlayer();
+            PigAttack();
         }
             
 
     }
 
-   
+
+
+
+    void Flip()
+    {
+        //here your flip funktion, as example
+        facingRight = !facingRight;
+        Vector3 tmpScale = gameObject.transform.localScale;
+        tmpScale.x *= -1;
+        gameObject.transform.localScale = tmpScale;
+    }
 
     private void ComePlayer()
     {
 
-        if(positionPlayer.gameObject != null)
-        {
-            pigAnimator.SetTrigger("Running");
-            transform.position = Vector2.MoveTowards(transform.position, positionPlayer.position, velocityEnemy * Time.deltaTime);
-        }
         
-
-    }
-
-    private void viewPlayer()
-    {
-
-        pigAnimator.SetTrigger("idle");
-        if (mycircleCollider.IsTouchingLayers(LayerMask.GetMask("Player")))
+        if (positionPlayer.gameObject != null && Vector2.Distance(transform.position, positionPlayer.position) < (raioView))
         {
-            ComePlayer();
+            
+           
+            transform.position = Vector2.MoveTowards(transform.position, positionPlayer.position, velocityEnemy * Time.deltaTime);
+            pigAnimator.SetBool("PigRunning", true);
+            if (Vector2.Distance(transform.position, positionPlayer.position) > (raioView))
+            {
+                pigAnimator.SetBool("PigRunning", false);
+
+            }
         }
+      
+
+    }
+
+   
+
+    private void FlipSprite()
+
+    {
+        bool correndoHorizontal = Mathf.Abs(pigRigidBody.velocity.x) > Mathf.Epsilon;
+
+        if (correndoHorizontal)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(pigRigidBody.velocity.x), 1f);
+        }
+
     }
 
 
-    
+   
+
+    private void MudancaCorrendoState()
+    {
+        bool correndoHorizontal = Mathf.Abs(pigRigidBody.velocity.x) > Mathf.Epsilon;
+
+    }
 
 
 
-
-    public void EnemyHit()
+        public void EnemyHit()
     {
 
         if (left)
@@ -102,9 +141,11 @@ public class Pig : MonoBehaviour
         StartCoroutine(StopHurting());
         pigLives--;
         print(pigLives);
-        pigAnimator.SetTrigger("PigRunning");
+        
         if (pigLives < 1)
         {
+            
+            
             Dying();
         }
 
@@ -124,7 +165,9 @@ public class Pig : MonoBehaviour
         GetComponent<CapsuleCollider2D>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
         pigRigidBody.bodyType = RigidbodyType2D.Static;
+        GetComponent<Pig>().enabled = false;
         StartCoroutine(DestroyPig());
+        
 
 
     }
@@ -137,31 +180,7 @@ public class Pig : MonoBehaviour
 
     }
 
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        FlipSprite();
-    }
-
-    private void PigMoviment()
-    {
-        if (IsFacingLeft())
-        {
-            pigRigidBody.velocity = new Vector2(-pigRunSpeed, 0f);
-            
-        }
-        else
-        {
-            pigRigidBody.velocity = new Vector2(pigRunSpeed, 0f);
-            
-        }
-    }
-
-    private void FlipSprite()
-    {
-        transform.localScale = new Vector2(Mathf.Sign(pigRigidBody.velocity.x), 1f);
-
-    }
+ 
 
     private bool IsFacingLeft()
     {
@@ -174,5 +193,16 @@ public class Pig : MonoBehaviour
         AudioSource.PlayClipAtPoint(pigDeathSFX, Camera.main.transform.position);
     }
 
-
+    void PigAttack()
+    {
+        if(Vector2.Distance(transform.position, positionPlayer.position) < (rangeAttack))
+        {
+            pigAnimator.SetTrigger("Attacking");
+        }
+        else
+        {
+            pigAnimator.SetTrigger("Running");
+        }
+       
+    }
 }

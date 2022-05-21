@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
             Attack();
             if (myBoxCollider2D.IsTouchingLayers(LayerMask.GetMask("Pig")))
             {
-               // PlayerHit();
+               PlayerHit();
             }
            
 
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
 
     IEnumerator StopHurting()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         isHurting = false;
 
