@@ -7,11 +7,11 @@ public class EnterDoor : MonoBehaviour
     // Start is called before the first frame update
 
 
-    [SerializeField] AudioClip openingDoorSFX, closeDoorSFX;
+    [SerializeField] AudioClip openingDoorSFX, closeDoorSFX; //Sons de abertura e fechamento da porta de entrada
 
     void Start()
     {
-        GetComponent<Animator>().SetTrigger("Open");
+        GetComponent<Animator>().SetTrigger("Open"); //anima a abertura da porta;
     }
 
     // Update is called once per frame
@@ -22,12 +22,12 @@ public class EnterDoor : MonoBehaviour
 
     void PlayOpeningDoorSFX()
     {
-        AudioSource.PlayClipAtPoint(openingDoorSFX, Camera.main.transform.position);
+        AudioSource.PlayClipAtPoint(openingDoorSFX, Camera.main.transform.position); //ativa o som de abertura
     }
 
     void PlayCloseDoorSFX()
     {
-        AudioSource.PlayClipAtPoint(closeDoorSFX, Camera.main.transform.position);
+        AudioSource.PlayClipAtPoint(closeDoorSFX, Camera.main.transform.position); //ativa o som de fechamento da porta
     }
 
 }
